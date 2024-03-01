@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from minigrid.core.constants import COLOR_NAMES
 from minigrid.core.grid import Grid
 from minigrid.core.mission import MissionSpace
@@ -19,7 +21,7 @@ class PlaygroundEnv(MiniGridEnv):
             width=self.size,
             height=self.size,
             max_steps=max_steps,
-            **kwargs
+            **kwargs,
         )
 
     @staticmethod
@@ -41,7 +43,6 @@ class PlaygroundEnv(MiniGridEnv):
 
         # For each row of rooms
         for j in range(0, 3):
-
             # For each column
             for i in range(0, 3):
                 xL = i * roomW

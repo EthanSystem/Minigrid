@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from minigrid.envs.blockedunlockpickup import BlockedUnlockPickupEnv
 from minigrid.envs.crossing import CrossingEnv
 from minigrid.envs.distshift import DistShiftEnv
@@ -18,6 +20,7 @@ from minigrid.envs.obstructedmaze import (
     ObstructedMaze_Full,
     ObstructedMazeEnv,
 )
+from minigrid.envs.obstructedmaze_v1 import ObstructedMaze_Full_V1
 from minigrid.envs.playground import PlaygroundEnv
 from minigrid.envs.putnear import PutNearEnv
 from minigrid.envs.redbluedoors import RedBlueDoorEnv

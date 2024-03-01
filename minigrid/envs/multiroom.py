@@ -1,4 +1,4 @@
-from typing import Optional
+from __future__ import annotations
 
 from minigrid.core.constants import COLOR_NAMES
 from minigrid.core.grid import Grid
@@ -47,12 +47,12 @@ class MultiRoomEnv(MiniGridEnv):
     - Each tile is encoded as a 3 dimensional tuple:
         `(OBJECT_IDX, COLOR_IDX, STATE)`
     - `OBJECT_TO_IDX` and `COLOR_TO_IDX` mapping can be found in
-        [minigrid/minigrid.py](minigrid/minigrid.py)
+        [minigrid/core/constants.py](minigrid/core/constants.py)
     - `STATE` refers to the door state with 0=open, 1=closed and 2=locked
 
     ## Rewards
 
-    A reward of '1' is given for success, and '0' for failure.
+    A reward of '1 - 0.9 * (step_count / max_steps)' is given for success, and '0' for failure.
 
     ## Termination
 
@@ -77,8 +77,8 @@ class MultiRoomEnv(MiniGridEnv):
         minNumRooms,
         maxNumRooms,
         maxRoomSize=10,
-        max_steps: Optional[int] = None,
-        **kwargs
+        max_steps: int | None = None,
+        **kwargs,
     ):
         assert minNumRooms > 0
         assert maxNumRooms >= minNumRooms
@@ -102,7 +102,7 @@ class MultiRoomEnv(MiniGridEnv):
             width=self.size,
             height=self.size,
             max_steps=max_steps,
-            **kwargs
+            **kwargs,
         )
 
     @staticmethod
@@ -145,7 +145,6 @@ class MultiRoomEnv(MiniGridEnv):
 
         # For each room
         for idx, room in enumerate(roomList):
-
             topX, topY = room.top
             sizeX, sizeY = room.size
 
@@ -242,7 +241,6 @@ class MultiRoomEnv(MiniGridEnv):
 
         # Try placing the next room
         for i in range(0, 8):
-
             # Pick which wall to place the out door on
             wallSet = {0, 1, 2, 3}
             wallSet.remove(entryDoorWall)

@@ -7,10 +7,19 @@ firstpage:
 
 
 List of publications & submissions using Minigrid or BabyAI (please open a pull request to add missing entries):
+- [Learning from Active Human Involvement through Proxy Value Propagation](https://metadriverse.github.io/pvp/)(UCLA, NeurIPS Spotlight 2023)
+- [Hierarchies of Reward Machines](https://arxiv.org/abs/2205.15752) (Imperial College London, ILASP, Universitat Pompeu Fabra, ICML 2023)
+- [Minimal Value-Equivalent Partial Models for Scalable and Robust Planning in Lifelong Reinforcement Learning](https://arxiv.org/abs/2301.10119) (Mila, McGill University, CoLLAs 2023)
+- [DEIR: Efficient and Robust Exploration through Discriminative-Model-Based Episodic Intrinsic Rewards](https://arxiv.org/abs/2304.10770) (U-Tokyo, Google Brain, IJCAI 2023)
+- [Contrastive Meta-Learning for Partially Observable Few-Shot Learning](https://arxiv.org/abs/2301.13136) (University of Edinburgh, Microsoft Research Cambridge, ICLR 2023)
+- [Towards Improving Exploration in Self-Imitation Learning using Intrinsic Motivation](https://arxiv.org/abs/2211.16838) (TECNALIA, IEEE ADPRL 2022)
+- [An Evaluation Study of Intrinsic Motivation Techniques applied to Reinforcement Learning over Hard Exploration Environments](https://arxiv.org/abs/2205.11184) (TECNALIA, CD-MAKE 2022)
+- [Evolution Strategies for Sparse Reward Gridworld Environments.](https://link.springer.com/chapter/10.1007/978-3-031-22695-3_19) (DSTG, AJCAI 2022)
 - [History Compression via Language Models in Reinforcement Learning.](https://proceedings.mlr.press/v162/paischer22a.html) (Johannes Kepler University Linz, PMLR 2022)
 - [Leveraging Approximate Symbolic Models for Reinforcement Learning via Skill Diversity](https://arxiv.org/abs/2202.02886) (Arizona State University, ICML 2022)
 - [How to Stay Curious while avoiding Noisy TVs using Aleatoric Uncertainty Estimation](https://proceedings.mlr.press/v162/mavor-parker22a.html) (University College London, Boston University, ICML 2022)
 - [In a Nutshell, the Human Asked for This: Latent Goals for Following Temporal Specifications](https://openreview.net/pdf?id=rUwm9wCjURV) (Imperial College London, ICLR 2022)
+- [Compositional Generalization in Grounded Language Learning via Induced Model Sparsity](https://aclanthology.org/2022.naacl-srw.19/) (Aalto University, NAACL-SRW 2022)
 - [Interesting Object, Curious Agent: Learning Task-Agnostic Exploration](https://arxiv.org/abs/2111.13119) (Meta AI Research, NeurIPS 2021)
 - [Safe Policy Optimization with Local Generalized Linear Function Approximations](https://arxiv.org/abs/2111.04894) (IBM Research, Tsinghua University, NeurIPS 2021)
 - [A Consciousness-Inspired Planning Agent for Model-Based Reinforcement Learning](https://arxiv.org/abs/2106.02097) (Mila, McGill University, NeurIPS 2021)

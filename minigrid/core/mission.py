@@ -1,4 +1,6 @@
-from typing import Any, Callable, Optional, Union
+from __future__ import annotations
+
+from typing import Any, Callable
 
 from gymnasium import spaces
 from gymnasium.utils import seeding
@@ -14,20 +16,21 @@ class MissionSpace(spaces.Space[str]):
     The space allows generating random mission strings constructed with an input placeholder list.
     Example Usage::
         >>> observation_space = MissionSpace(mission_func=lambda color: f"Get the {color} ball.",
-                                                ordered_placeholders=[["green", "blue"]])
+        ...                                  ordered_placeholders=[["green", "blue"]])
+        >>> _ = observation_space.seed(123)
         >>> observation_space.sample()
-            "Get the green ball."
-        >>> observation_space = MissionSpace(mission_func=lambda : "Get the ball.".,
-                                                ordered_placeholders=None)
+        'Get the green ball.'
+        >>> observation_space = MissionSpace(mission_func=lambda : "Get the ball.",
+        ...                                  ordered_placeholders=None)
         >>> observation_space.sample()
-            "Get the ball."
+        'Get the ball.'
     """
 
     def __init__(
         self,
         mission_func: Callable[..., str],
-        ordered_placeholders: Optional["list[list[str]]"] = None,
-        seed: Optional[Union[int, seeding.RandomNumberGenerator]] = None,
+        ordered_placeholders: list[list[str]] | None = None,
+        seed: int | seeding.RandomNumberGenerator | None = None,
     ):
         r"""Constructor of :class:`MissionSpace` space.
 
@@ -166,26 +169,27 @@ class MissionSpace(spaces.Space[str]):
     def __eq__(self, other) -> bool:
         """Check whether ``other`` is equivalent to this instance."""
         if isinstance(other, MissionSpace):
-
             # Check that place holder lists are the same
             if self.ordered_placeholders is not None:
                 # Check length
-                if (len(self.order_placeholder) == len(other.order_placeholder)) and (
+                if (
+                    len(self.ordered_placeholders) == len(other.ordered_placeholders)
+                ) and (
                     all(
                         set(i) == set(j)
-                        for i, j in zip(self.order_placeholder, other.order_placeholder)
+                        for i, j in zip(
+                            self.ordered_placeholders, other.ordered_placeholders
+                        )
                     )
                 ):
                     # Check mission string is the same with dummy space placeholders
-                    test_placeholders = [""] * len(self.order_placeholder)
+                    test_placeholders = [""] * len(self.ordered_placeholders)
                     mission = self.mission_func(*test_placeholders)
                     other_mission = other.mission_func(*test_placeholders)
                     return mission == other_mission
             else:
-
                 # Check that other is also None
                 if other.ordered_placeholders is None:
-
                     # Check mission string is the same
                     mission = self.mission_func()
                     other_mission = other.mission_func()

@@ -1,4 +1,4 @@
-from typing import Optional
+from __future__ import annotations
 
 import numpy as np
 
@@ -41,12 +41,12 @@ class LavaGapEnv(MiniGridEnv):
     - Each tile is encoded as a 3 dimensional tuple:
         `(OBJECT_IDX, COLOR_IDX, STATE)`
     - `OBJECT_TO_IDX` and `COLOR_TO_IDX` mapping can be found in
-        [minigrid/minigrid.py](minigrid/minigrid.py)
+        [minigrid/core/constants.py](minigrid/core/constants.py)
     - `STATE` refers to the door state with 0=open, 1=closed and 2=locked
 
     ## Rewards
 
-    A reward of '1' is given for success, and '0' for failure.
+    A reward of '1 - 0.9 * (step_count / max_steps)' is given for success, and '0' for failure.
 
     ## Termination
 
@@ -67,7 +67,7 @@ class LavaGapEnv(MiniGridEnv):
     """
 
     def __init__(
-        self, size, obstacle_type=Lava, max_steps: Optional[int] = None, **kwargs
+        self, size, obstacle_type=Lava, max_steps: int | None = None, **kwargs
     ):
         self.obstacle_type = obstacle_type
         self.size = size
@@ -87,7 +87,7 @@ class LavaGapEnv(MiniGridEnv):
             # Set this to True for maximum speed
             see_through_walls=False,
             max_steps=max_steps,
-            **kwargs
+            **kwargs,
         )
 
     @staticmethod

@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import pickle
+import re
 import warnings
 
 import gymnasium as gym
@@ -257,7 +260,6 @@ def test_interactive_mode(env_id):
 
 
 def test_mission_space():
-
     # Test placeholders
     mission_space = MissionSpace(
         mission_func=lambda color, obj_type: f"Get the {color} {obj_type}.",
@@ -301,3 +303,48 @@ def test_mission_space():
 
     assert mission_space.contains("get the green key and the green key.")
     assert mission_space.contains("go fetch the red ball and the green key.")
+
+
+# not reasonable to test for all environments, test for a few of them.
+@pytest.mark.parametrize(
+    "env_id",
+    [
+        "MiniGrid-Empty-8x8-v0",
+        "MiniGrid-DoorKey-16x16-v0",
+        "MiniGrid-ObstructedMaze-1Dl-v0",
+    ],
+)
+def test_env_sync_vectorization(env_id):
+    def env_maker(env_id, **kwargs):
+        def env_func():
+            env = gym.make(env_id, **kwargs)
+            return env
+
+        return env_func
+
+    num_envs = 4
+    env = gym.vector.SyncVectorEnv([env_maker(env_id) for _ in range(num_envs)])
+    env.reset()
+    env.step(env.action_space.sample())
+    env.close()
+
+
+def test_pprint_grid(env_id="MiniGrid-Empty-8x8-v0"):
+    env = gym.make(env_id)
+
+    env_repr = str(env)
+    assert (
+        env_repr
+        == "<OrderEnforcing<PassiveEnvChecker<EmptyEnv<MiniGrid-Empty-8x8-v0>>>>"
+    )
+
+    with pytest.raises(
+        ValueError,
+        match=re.escape(
+            "The environment hasn't been `reset` therefore the `agent_pos`, `agent_dir` or `grid` are unknown."
+        ),
+    ):
+        env.unwrapped.pprint_grid()
+
+    env.reset()
+    assert isinstance(env.unwrapped.pprint_grid(), str)
